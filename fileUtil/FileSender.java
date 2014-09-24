@@ -27,10 +27,10 @@ public class FileSender {
     private OutputStream m_socketOut;
     private BufferedReader m_fileIn;
     
-    public FileSender(File file, String address){
+    public FileSender(File file, String address, int port){
         m_file = file;
         try {
-            m_socket = new Socket(address, 9090);
+            m_socket = new Socket(address, port);
             m_socketOut = m_socket.getOutputStream();
             m_fileIn = new BufferedReader(new InputStreamReader(new FileInputStream(m_file)));
         } catch (IOException ex) {
