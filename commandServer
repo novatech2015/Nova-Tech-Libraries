@@ -1,0 +1,50 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+
+package socketserver;
+
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
+import java.net.ServerSocket;
+import java.net.Socket;
+import java.util.Scanner;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
+/**
+ *
+ * @author Christopher Kha
+ */
+public class SocketServer {
+
+    /**
+     * @param args the command line arguments
+     */
+    static String m_lastLine = new String();
+    static byte m_mybyte = 0;
+    public static void main(String[] args) {
+        try {
+            Socket m_client = null;
+            ServerSocket m_socketServer = new ServerSocket();
+            m_client = m_socketServer.accept();
+            System.out.println("connected");
+            OutputStream m_outputStream = m_client.getOutputStream();
+            InputStream m_inputStream = m_client.getInputStream();
+            Scanner m_scanner = new Scanner(System.in);
+            while(true){
+                m_lastLine = m_scanner.nextLine();
+                Byte.parseByte(m_lastLine);
+                m_mybyte = Byte.parseByte(m_lastLine);
+                m_outputStream.write(m_mybyte);
+            }
+        } catch (IOException ex) {
+            Logger.getLogger(SocketServer.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+    }
+    
+}
